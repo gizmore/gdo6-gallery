@@ -6,6 +6,7 @@ use GDO\Form\GDO_Form;
 use GDO\Form\MethodCrud;
 use GDO\Gallery\Gallery;
 use GDO\Gallery\GalleryImage;
+use GDO\DB\GDO;
 
 final class Crud extends MethodCrud
 {
@@ -50,14 +51,14 @@ final class Crud extends MethodCrud
         parent::createFormButtons($form);
     }
     
-    public function afterCreate(GDO_Form $form)
+    public function afterCreate(GDO_Form $form, GDO $gdo)
     {
         $images = $form->getFormVar('images');
         foreach ($images as $image)
         {
             GalleryImage::blank(array(
                 'image_file' => $image->getID(),
-                'image_gallery' => $this->gdo->getID(),
+                'image_gallery' => $gdo->getID(),
                 'image_description' => null,
             ))->replace();
         }
