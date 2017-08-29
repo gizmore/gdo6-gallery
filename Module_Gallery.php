@@ -1,12 +1,12 @@
 <?php
 namespace GDO\Gallery;
 
-use GDO\Core\Module;
+use GDO\Core\GDO_Module;
 use GDO\Template\GDT_Bar;
 
-final class Module_Gallery extends Module
+final class Module_Gallery extends GDO_Module
 {
-    public function getClasses() { return ['GDO\Gallery\Gallery', 'GDO\Gallery\GalleryImage']; }
+    public function getClasses() { return ['GDO\Gallery\GDO_Gallery', 'GDO\Gallery\GDO_GalleryImage']; }
     public function onLoadLanguage() { $this->loadLanguage('lang/gallery'); }
 
     public function hookLeftBar(GDT_Bar $navbar)

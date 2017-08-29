@@ -4,8 +4,8 @@ namespace GDO\Gallery\Method;
 use GDO\File\GDT_File;
 use GDO\Form\GDT_Form;
 use GDO\Form\MethodCrud;
-use GDO\Gallery\Gallery;
-use GDO\Gallery\GalleryImage;
+use GDO\Gallery\GDO_Gallery;
+use GDO\Gallery\GDO_GalleryImage;
 use GDO\DB\GDO;
 
 final class Crud extends MethodCrud
@@ -17,12 +17,11 @@ final class Crud extends MethodCrud
 
     public function gdoTable()
     {
-        return Gallery::table();
-        
+        return GDO_Gallery::table();
     }
 
     /**
-     * @return Gallery
+     * @return GDO_Gallery
      */
     public function getGallery()
     {
@@ -38,7 +37,7 @@ final class Crud extends MethodCrud
             $images = $this->getGallery()->getImages();
             foreach ($images as $image)
             {
-                $image instanceof GalleryImage;
+                $image instanceof GDO_GalleryImage;
                 $file = $image->getFile();
                 $file->tempHref($image->href_show());
                 $files[] = $file;
@@ -56,7 +55,7 @@ final class Crud extends MethodCrud
         $images = $form->getFormVar('images');
         foreach ($images as $image)
         {
-            GalleryImage::blank(array(
+            GDO_GalleryImage::blank(array(
                 'image_file' => $image->getID(),
                 'image_gallery' => $gdo->getID(),
                 'image_description' => null,

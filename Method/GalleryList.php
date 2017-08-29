@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Gallery\Method;
 
-use GDO\Gallery\Gallery;
+use GDO\Gallery\GDO_Gallery;
 use GDO\Table\MethodQueryList;
 use GDO\Util\Common;
 
@@ -9,7 +9,7 @@ final class GalleryList extends MethodQueryList
 {
     public function gdoTable()
     {
-        return Gallery::table();
+        return GDO_Gallery::table();
     }
 
     public function gdoQuery()
@@ -21,6 +21,5 @@ final class GalleryList extends MethodQueryList
         }
         return $query;
     }
-    
     
 }

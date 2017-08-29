@@ -1,8 +1,8 @@
 <?php
-use GDO\Gallery\GalleryImage;
-use GDO\User\User;
-$image instanceof GalleryImage;
-$user = User::current();
+use GDO\Gallery\GDO_GalleryImage;
+use GDO\User\GDO_User;
+$image instanceof GDO_GalleryImage;
+$user = GDO_User::current();
 ?>
 <md-card class="gdo-gallery-image">
   <md-card-title>

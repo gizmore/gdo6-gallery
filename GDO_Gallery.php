@@ -8,9 +8,9 @@ use GDO\DB\GDT_CreatedBy;
 use GDO\Template\GDT_Template;
 use GDO\Type\GDT_Message;
 use GDO\Type\GDT_String;
-use GDO\User\User;
+use GDO\User\GDO_User;
 
-final class Gallery extends GDO
+final class GDO_Gallery extends GDO
 {
     public function gdoColumns()
     {
@@ -23,7 +23,7 @@ final class Gallery extends GDO
         );
     }
     
-    public function canEdit(User $user) { return $this->getCreatorID() === $user->getID(); }
+    public function canEdit(GDO_User $user) { return $this->getCreatorID() === $user->getID(); }
     
 
     /**
@@ -49,7 +49,7 @@ final class Gallery extends GDO
     
     public function queryImages()
     {
-        return GalleryImage::table()->select()->where("image_gallery={$this->getID()}")->exec()->fetchAllObjects();
+        return GDO_GalleryImage::table()->select()->where("image_gallery={$this->getID()}")->exec()->fetchAllObjects();
     }
     
     public function getImageCount()
@@ -59,7 +59,7 @@ final class Gallery extends GDO
     
     public function queryImageCount()
     {
-        return GalleryImage::table()->countWhere("image_gallery={$this->getID()}");
+        return GDO_GalleryImage::table()->countWhere("image_gallery={$this->getID()}");
     }
     
 }

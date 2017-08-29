@@ -5,32 +5,32 @@ use GDO\DB\GDO;
 use GDO\DB\GDT_AutoInc;
 use GDO\DB\GDT_CreatedAt;
 use GDO\DB\GDT_Object;
-use GDO\File\File;
+use GDO\File\GDO_File;
 use GDO\File\GDT_File;
 use GDO\Template\GDT_Template;
 use GDO\Type\GDT_Message;
 
-final class GalleryImage extends GDO
+final class GDO_GalleryImage extends GDO
 {
     public function gdoColumns()
     {
         return array(
             GDT_AutoInc::make('image_id'),
             GDT_File::make('image_file')->imageFile(),
-            GDT_Object::make('image_gallery')->table(Gallery::table()),
+            GDT_Object::make('image_gallery')->table(GDO_Gallery::table()),
             GDT_Message::make('image_description')->max(512),
             GDT_CreatedAt::make('image_created'),
         );
     }
     
     /**
-     * @return Gallery
+     * @return GDO_Gallery
      */
     public function getGallery() { return $this->getValue('image_gallery'); }
     public function getGalleryID() { return $this->getVar('image_gallery'); }
 
     /**
-     * @return File
+     * @return GDO_File
      */
     public function getFile() { return $this->getValue('image_file'); }
     
