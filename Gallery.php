@@ -2,12 +2,12 @@
 namespace GDO\Gallery;
 
 use GDO\DB\GDO;
-use GDO\DB\GDO_AutoInc;
-use GDO\DB\GDO_CreatedAt;
-use GDO\DB\GDO_CreatedBy;
-use GDO\Template\GDO_Template;
-use GDO\Type\GDO_Message;
-use GDO\Type\GDO_String;
+use GDO\DB\GDT_AutoInc;
+use GDO\DB\GDT_CreatedAt;
+use GDO\DB\GDT_CreatedBy;
+use GDO\Template\GDT_Template;
+use GDO\Type\GDT_Message;
+use GDO\Type\GDT_String;
 use GDO\User\User;
 
 final class Gallery extends GDO
@@ -15,11 +15,11 @@ final class Gallery extends GDO
     public function gdoColumns()
     {
         return array(
-            GDO_AutoInc::make('gallery_id'),
-            GDO_String::make('gallery_title'),
-            GDO_Message::make('gallery_description'),
-            GDO_CreatedBy::make('gallery_creator'),
-            GDO_CreatedAt::make('gallery_created'),
+            GDT_AutoInc::make('gallery_id'),
+            GDT_String::make('gallery_title'),
+            GDT_Message::make('gallery_description'),
+            GDT_CreatedBy::make('gallery_creator'),
+            GDT_CreatedAt::make('gallery_created'),
         );
     }
     
@@ -40,7 +40,7 @@ final class Gallery extends GDO
     
     public function href_show() { return href('Gallery', 'Show', "&id={$this->getID()}"); }
     
-    public function renderList() { return GDO_Template::php('Gallery', 'listitem/gallery.php', ['gallery'=>$this]); }
+    public function renderList() { return GDT_Template::php('Gallery', 'listitem/gallery.php', ['gallery'=>$this]); }
     
     public function getImages()
     {

@@ -1,7 +1,7 @@
 <?php
-use GDO\Template\GDO_Bar;
-use GDO\UI\GDO_Link;
+use GDO\Template\GDT_Bar;
+use GDO\UI\GDT_Link;
 use GDO\User\User;
-$navbar instanceof GDO_Bar;
+$navbar instanceof GDT_Bar;
 $user = User::current();
-$navbar->addField(GDO_Link::make()->href(href('Gallery', 'GalleryList', '&user='.$user->getID())));
+$navbar->addField(GDT_Link::make()->href(href('Gallery', 'GalleryList', '&user='.$user->getID())));

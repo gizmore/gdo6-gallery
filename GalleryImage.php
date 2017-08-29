@@ -2,24 +2,24 @@
 namespace GDO\Gallery;
 
 use GDO\DB\GDO;
-use GDO\DB\GDO_AutoInc;
-use GDO\DB\GDO_CreatedAt;
-use GDO\DB\GDO_Object;
+use GDO\DB\GDT_AutoInc;
+use GDO\DB\GDT_CreatedAt;
+use GDO\DB\GDT_Object;
 use GDO\File\File;
-use GDO\File\GDO_File;
-use GDO\Template\GDO_Template;
-use GDO\Type\GDO_Message;
+use GDO\File\GDT_File;
+use GDO\Template\GDT_Template;
+use GDO\Type\GDT_Message;
 
 final class GalleryImage extends GDO
 {
     public function gdoColumns()
     {
         return array(
-            GDO_AutoInc::make('image_id'),
-            GDO_File::make('image_file')->imageFile(),
-            GDO_Object::make('image_gallery')->table(Gallery::table()),
-            GDO_Message::make('image_description')->max(512),
-            GDO_CreatedAt::make('image_created'),
+            GDT_AutoInc::make('image_id'),
+            GDT_File::make('image_file')->imageFile(),
+            GDT_Object::make('image_gallery')->table(Gallery::table()),
+            GDT_Message::make('image_description')->max(512),
+            GDT_CreatedAt::make('image_created'),
         );
     }
     
@@ -48,6 +48,6 @@ final class GalleryImage extends GDO
     
     public function renderCard()
     {
-        return GDO_Template::php('Gallery', 'card/gallery_image.php', ['image' => $this]);
+        return GDT_Template::php('Gallery', 'card/gallery_image.php', ['image' => $this]);
     }
 }

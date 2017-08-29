@@ -1,8 +1,8 @@
 <?php
 use GDO\Avatar\Avatar;
 use GDO\Gallery\Gallery;
-use GDO\UI\GDO_EditButton;
-use GDO\UI\GDO_Icon;
+use GDO\UI\GDT_EditButton;
+use GDO\UI\GDT_Icon;
 use GDO\User\User;
 $gallery instanceof Gallery;
 ?>
@@ -14,7 +14,7 @@ $gallery instanceof Gallery;
     <p><?= $gallery->displayDescription(); ?></p>
   </div>
   <?php if ($gallery->canEdit(User::current())) : ?>
-    <?= GDO_EditButton::make()->href(href('Gallery', 'Crud', "&id={$gallery->getID()}"))?>
+    <?= GDT_EditButton::make()->href(href('Gallery', 'Crud', "&id={$gallery->getID()}"))?>
   <?php endif; ?>
-  <?= GDO_Icon::iconS('arrow_right'); ?>
+  <?= GDT_Icon::iconS('arrow_right'); ?>
 </md-list-item>

@@ -1,8 +1,8 @@
 <?php
 namespace GDO\Gallery\Method;
 
-use GDO\File\GDO_File;
-use GDO\Form\GDO_Form;
+use GDO\File\GDT_File;
+use GDO\Form\GDT_Form;
 use GDO\Form\MethodCrud;
 use GDO\Gallery\Gallery;
 use GDO\Gallery\GalleryImage;
@@ -29,9 +29,9 @@ final class Crud extends MethodCrud
         return $this->gdo;
     }
     
-    public function createFormButtons(GDO_Form $form)
+    public function createFormButtons(GDT_Form $form)
     {
-        $field = GDO_File::make('images')->imageFile()->maxfiles(100)->minfiles(1);
+        $field = GDT_File::make('images')->imageFile()->maxfiles(100)->minfiles(1);
         if ($this->crudMode === self::EDITED)
         {
             $files = [];
@@ -51,7 +51,7 @@ final class Crud extends MethodCrud
         parent::createFormButtons($form);
     }
     
-    public function afterCreate(GDO_Form $form, GDO $gdo)
+    public function afterCreate(GDT_Form $form, GDO $gdo)
     {
         $images = $form->getFormVar('images');
         foreach ($images as $image)

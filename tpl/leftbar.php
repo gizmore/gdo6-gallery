@@ -1,6 +1,6 @@
 <?php
-use GDO\Template\GDO_Bar;
-use GDO\UI\GDO_Link;
+use GDO\Template\GDT_Bar;
+use GDO\UI\GDT_Link;
 use GDO\User\User;
-$navbar instanceof GDO_Bar;
-$navbar->addField(GDO_Link::make('link_gallery')->href(href('Gallery', 'GalleryList')));
+$navbar instanceof GDT_Bar;
+$navbar->addField(GDT_Link::make('link_gallery')->href(href('Gallery', 'GalleryList')));
