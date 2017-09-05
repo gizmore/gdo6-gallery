@@ -36,7 +36,7 @@ final class GDO_GalleryImage extends GDO
     
     
     /**
-     * @return User
+     * @return GDO_User
      */
     public function getCreator() { return $this->getGallery()->getCreator(); }
     public function getCreated() { return $this->getVar('image_created'); }

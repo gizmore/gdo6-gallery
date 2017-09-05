@@ -27,7 +27,7 @@ final class GDO_Gallery extends GDO
     
 
     /**
-     * @return User
+     * @return GDO_User
      */
     public function getCreator() { return $this->getValue('gallery_creator'); }
     public function getCreatorID() { return $this->getVar('gallery_creator'); }
