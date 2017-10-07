@@ -6,7 +6,7 @@ use GDO\Form\GDT_Form;
 use GDO\Form\MethodCrud;
 use GDO\Gallery\GDO_Gallery;
 use GDO\Gallery\GDO_GalleryImage;
-use GDO\DB\GDO;
+use GDO\Core\GDO;
 
 final class Crud extends MethodCrud
 {
