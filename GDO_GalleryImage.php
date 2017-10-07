@@ -7,8 +7,9 @@ use GDO\DB\GDT_CreatedAt;
 use GDO\DB\GDT_Object;
 use GDO\File\GDO_File;
 use GDO\File\GDT_File;
-use GDO\Template\GDT_Template;
-use GDO\Type\GDT_Message;
+use GDO\Core\GDT_Template;
+use GDO\UI\GDT_Message;
+use GDO\User\GDO_User;
 
 final class GDO_GalleryImage extends GDO
 {

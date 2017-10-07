@@ -2,7 +2,7 @@
 use GDO\Gallery\GDO_Gallery;
 use GDO\Gallery\GDO_GalleryImage;
 use GDO\Table\GDT_List;
-use GDO\Template\GDT_Bar;
+use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Button;
 
 $gallery instanceof GDO_Gallery;

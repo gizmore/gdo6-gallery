@@ -2,7 +2,7 @@
 namespace GDO\Gallery;
 
 use GDO\Core\GDO_Module;
-use GDO\Template\GDT_Bar;
+use GDO\UI\GDT_Bar;
 
 final class Module_Gallery extends GDO_Module
 {
