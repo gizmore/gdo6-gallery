@@ -7,6 +7,7 @@ use GDO\Form\MethodCrud;
 use GDO\Gallery\GDO_Gallery;
 use GDO\Gallery\GDO_GalleryImage;
 use GDO\Core\GDO;
+use GDO\File\GDT_ImageFile;
 
 final class Crud extends MethodCrud
 {
@@ -30,7 +31,7 @@ final class Crud extends MethodCrud
     
     public function createFormButtons(GDT_Form $form)
     {
-        $field = GDT_File::make('images')->imageFile()->maxfiles(100)->minfiles(1);
+        $field = GDT_ImageFile::make('images')->maxfiles(100)->minfiles(1);
         if ($this->crudMode === self::EDITED)
         {
             $files = [];

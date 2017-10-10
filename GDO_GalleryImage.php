@@ -10,6 +10,7 @@ use GDO\File\GDT_File;
 use GDO\Core\GDT_Template;
 use GDO\UI\GDT_Message;
 use GDO\User\GDO_User;
+use GDO\File\GDT_ImageFile;
 
 final class GDO_GalleryImage extends GDO
 {
@@ -17,7 +18,7 @@ final class GDO_GalleryImage extends GDO
     {
         return array(
             GDT_AutoInc::make('image_id'),
-            GDT_File::make('image_file')->imageFile(),
+            GDT_ImageFile::make('image_file'),
             GDT_Object::make('image_gallery')->table(GDO_Gallery::table()),
             GDT_Message::make('image_description')->max(512),
             GDT_CreatedAt::make('image_created'),
