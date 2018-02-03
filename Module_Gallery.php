@@ -3,6 +3,7 @@ namespace GDO\Gallery;
 
 use GDO\Core\GDO_Module;
 use GDO\UI\GDT_Bar;
+use GDO\User\GDO_User;
 
 final class Module_Gallery extends GDO_Module
 {
@@ -13,8 +14,13 @@ final class Module_Gallery extends GDO_Module
     {
         $this->templatePHP('leftbar.php', ['navbar'=>$navbar]);
     }
+
     public function hookRightBar(GDT_Bar $navbar)
     {
-        $this->templatePHP('rightbar.php', ['navbar'=>$navbar]);
+    	if (GDO_User::current()->isAuthenticated())
+    	{
+    		$this->templatePHP('rightbar.php', ['navbar'=>$navbar]);
+    	}
     }
+
 }
