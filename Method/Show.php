@@ -7,10 +7,14 @@ use GDO\Util\Common;
 
 final class Show extends Method
 {
-    public function execute()
-    {
-        $gallery = GDO_Gallery::findById(Common::getGetString('id'));
-        return $this->templatePHP('gallery.php', ['gallery' => $gallery]);
-    }
-    
+	public function gdoParameters()
+	{
+	}
+	
+	public function execute()
+	{
+		$gallery = GDO_Gallery::findById(Common::getGetString('id'));
+		return $this->templatePHP('gallery.php', ['gallery' => $gallery]);
+	}
+	
 }
