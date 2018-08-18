@@ -10,7 +10,9 @@ final class Image extends Method
 {
 	public function execute()
 	{
-		$image = GDO_GalleryImage::getById(Common::getGetString('id'));
-		return GetFile::make()->executeWithId($image->getFile()->getID());
+		$fileId = Common::getGetString('id');
+		$image = GDO_GalleryImage::getBy('files_file', $fileId);
+		$gallery = $image->getGallery();
+		return GetFile::make()->executeWithId($fileId);
 	}
 }

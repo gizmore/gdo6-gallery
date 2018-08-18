@@ -14,7 +14,8 @@ $gallery instanceof GDO_Gallery;
 	<p><?= $gallery->displayDescription(); ?></p>
   </div>
   <?php if ($gallery->canEdit(GDO_User::current())) : ?>
-	<?= GDT_EditButton::make()->href(href('Gallery', 'Crud', "&id={$gallery->getID()}"))?>
+	<?= GDT_EditButton::make()->href(href('Gallery', 'Crud', "&id={$gallery->getID()}"))->render(); ?>
   <?php endif; ?>
+  
   <?= GDT_Icon::iconS('arrow_right'); ?>
 </md-list-item>

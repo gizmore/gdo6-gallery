@@ -9,17 +9,24 @@ use GDO\Core\GDT_Template;
 use GDO\UI\GDT_Message;
 use GDO\DB\GDT_String;
 use GDO\User\GDO_User;
+use GDO\File\WithFiles;
+use GDO\File\GDT_Files;
 
 final class GDO_Gallery extends GDO
 {
+// 	use WithFiles;
+	
+// 	public function gdoFileObjectTable() { return GDO_GalleryImage::table(); }
+	
 	public function gdoColumns()
 	{
 		return array(
 			GDT_AutoInc::make('gallery_id'),
-			GDT_String::make('gallery_title'),
+			GDT_String::make('gallery_title')->notNull(),
 			GDT_Message::make('gallery_description'),
 			GDT_CreatedBy::make('gallery_creator'),
 			GDT_CreatedAt::make('gallery_created'),
+			GDT_Files::make('gallery_files')->maxfiles(100)->fileTable(GDO_GalleryImage::table())->previewHREF(href('Gallery', 'Image', '&id=')),
 		);
 	}
 	
@@ -44,12 +51,7 @@ final class GDO_Gallery extends GDO
 	
 	public function getImages()
 	{
-		return $this->queryImages();
-	}
-	
-	public function queryImages()
-	{
-		return GDO_GalleryImage::table()->select()->where("image_gallery={$this->getID()}")->exec()->fetchAllObjects();
+		return $this->getValue('gallery_images');
 	}
 	
 	public function getImageCount()
@@ -59,7 +61,7 @@ final class GDO_Gallery extends GDO
 	
 	public function queryImageCount()
 	{
-		return GDO_GalleryImage::table()->countWhere("image_gallery={$this->getID()}");
+		return GDO_GalleryImage::table()->countWhere("files_object={$this->getID()}");
 	}
 	
 }

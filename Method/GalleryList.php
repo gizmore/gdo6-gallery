@@ -11,8 +11,6 @@ use GDO\User\GDO_User;
 
 final class GalleryList extends MethodQueryList
 {
-	private $userId;
-	
 	public function gdoParameters()
 	{
 		return array_merge(parent::gdoParameters(), array(
@@ -30,7 +28,6 @@ final class GalleryList extends MethodQueryList
 		$query = $this->gdoTable()->select();
 		if ($userId = Common::getGetInt('user'))
 		{
-			$this->userId = $userId;
 			$query->where('gallery_creator='.$userId);
 		}
 		return $query;
@@ -41,7 +38,7 @@ final class GalleryList extends MethodQueryList
 		$response = GDT_Response::make();
 		
 		# Own gallery allows you to add an image.
-		if ($this->userId === GDO_User::current()->getID())
+		if (Common::getGetInt('user') == GDO_User::current()->getID())
 		{
 			$link = GDT_Link::make('link_gallery_add')->icon('create')->href(href('Gallery', 'Crud'));
 			$response->addField($link);
