@@ -9,20 +9,23 @@ use GDO\Core\GDT_Template;
 use GDO\UI\GDT_Message;
 use GDO\DB\GDT_String;
 use GDO\User\GDO_User;
-use GDO\File\WithFiles;
 use GDO\File\GDT_Files;
 
+/**
+ * A gallery is a collection of images.
+ * 
+ * @see GDT_Files
+ * @author gizmore@wechall.net
+ * @version 6.08
+ * @since 6.02
+ */
 final class GDO_Gallery extends GDO
 {
-// 	use WithFiles;
-	
-// 	public function gdoFileObjectTable() { return GDO_GalleryImage::table(); }
-	
 	public function gdoColumns()
 	{
 		return array(
 			GDT_AutoInc::make('gallery_id'),
-			GDT_String::make('gallery_title')->notNull(),
+			GDT_String::make('gallery_title')->notNull()->initial(t('gallery_title_suggestion')),
 			GDT_Message::make('gallery_description'),
 			GDT_CreatedBy::make('gallery_creator'),
 			GDT_CreatedAt::make('gallery_created'),
@@ -50,6 +53,13 @@ final class GDO_Gallery extends GDO
 	public function renderList() { return GDT_Template::php('Gallery', 'listitem/gallery.php', ['gallery'=>$this]); }
 	
 	public function getImages()
+	{
+		return GDO_GalleryImage::table()->select('*')->
+			where("files_object=" . $this->getID())->
+			exec()->fetchAllObjects();
+	}
+	
+	public function getFiles()
 	{
 		return $this->getValue('gallery_images');
 	}
