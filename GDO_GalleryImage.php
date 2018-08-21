@@ -7,39 +7,63 @@ use GDO\User\GDO_User;
 use GDO\File\GDO_FileTable;
 use GDO\DB\GDT_String;
 
+/**
+ * A table that maps Files to Galleries.
+ * Required by GDT_Files.
+ *  
+ * @author gizmore@wechall.net
+ * @since 6.07
+ * @version 6.08
+ * 
+ * @see GDO_FileTable
+ * @see GDT_Files
+ */
 final class GDO_GalleryImage extends GDO_FileTable
 {
+	#################
+	### FileTable ###
+	#################
 	public function gdoFileObjectTable() { return GDO_Gallery::table(); }
-	
+
+	###########
+	### GDO ###
+	###########
+	public function gdoCached() { return false; }
 	public function gdoColumns()
 	{
 		return array_merge(parent::gdoColumns(), array(
 			GDT_String::make('files_description'),
 		));
 	}
-	
+
+	##############
+	### Getter ###
+	##############
+	/**
+	 * @return GDO_File
+	 */
+	public function getFile() { return $this->getValue('files_file'); }
+
 	/**
 	 * @return GDO_Gallery
 	 */
 	public function getGallery() { return $this->getValue('files_object'); }
 	public function getGalleryID() { return $this->getVar('files_object'); }
-
-	/**
-	 * @return GDO_File
-	 */
-	public function getFile() { return $this->getValue('files_file'); }
-	
 	
 	/**
 	 * @return GDO_User
 	 */
 	public function getCreator() { return $this->getValue('files_creator'); }
 	public function getCreated() { return $this->getVar('files_created'); }
-	public function displayDate() { return tt($this->getCreated()); }
 	public function getDescription() { return $this->getVar('files_description'); }
+
+	public function displayDate() { return tt($this->getCreated()); }
 	public function displayDescription() { return $this->gdoColumn('files_description')->renderCell(); }
-	public function href_show() { return href('Gallery', 'Image', "&id={$this->getID()}"); }
 	
+	##############
+	### Render ###
+	##############
+	public function href_show() { return href('Gallery', 'Image', "&id={$this->getID()}"); }
 	
 	public function renderCard()
 	{
