@@ -6,9 +6,12 @@ use GDO\Form\MethodCrud;
 use GDO\Gallery\GDO_Gallery;
 use GDO\Core\GDO;
 use GDO\User\GDO_User;
+use GDO\Gallery\Module_Gallery;
 
 final class Crud extends MethodCrud
 {
+	public function isGuestAllowed() { return Module_Gallery::instance()->cfgGuestGalleries(); }
+	
 	public function hrefList()
 	{
 		return href('Gallery', 'GalleryList', '&user='.GDO_User::current()->getID());
