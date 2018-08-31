@@ -9,12 +9,12 @@ use GDO\Core\GDT_Template;
 use GDO\UI\GDT_Message;
 use GDO\DB\GDT_String;
 use GDO\User\GDO_User;
-use GDO\File\GDT_Files;
+use GDO\File\GDT_ImageFiles;
 
 /**
  * A gallery is a collection of images.
  * 
- * @see GDT_Files
+ * @see GDT_ImageFiles
  * @author gizmore@wechall.net
  * @version 6.08
  * @since 6.02
@@ -29,7 +29,10 @@ final class GDO_Gallery extends GDO
 			GDT_Message::make('gallery_description'),
 			GDT_CreatedBy::make('gallery_creator'),
 			GDT_CreatedAt::make('gallery_created'),
-			GDT_Files::make('gallery_files')->maxfiles(100)->fileTable(GDO_GalleryImage::table())->previewHREF(href('Gallery', 'Image', '&id=')),
+			GDT_ImageFiles::make('gallery_files')->maxfiles(100)->
+				scaledVersion('thumb', 320, 240)->
+				fileTable(GDO_GalleryImage::table())->
+				previewHREF(href('Gallery', 'Image', '&id=')),
 		);
 	}
 	
