@@ -4,20 +4,23 @@ use GDO\Gallery\GDO_GalleryImage;
 use GDO\Table\GDT_List;
 use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Button;
+use GDO\User\GDO_User;
 
-/** @var $gallery Gallery **/
-$gallery instanceof GDO_Gallery;
+/** @var $gallery GDO_Gallery **/
+$user = GDO_User::current();
 ?>
-<?php 
-$button = GDT_Button::make()->icon('add')->href(href('Gallery', 'Crud', "&id={$gallery->getID()}"));
+<?php
 $bar = GDT_Bar::make();
-$bar->addField($button);
+if ($gallery->canEdit($user))
+{
+	$button = GDT_Button::make()->icon('edit')->label('btn_edit')->href(href('Gallery', 'Crud', "&id={$gallery->getID()}"));
+	$bar->addField($button);
+}
 echo $bar->renderCell();
 ?>
-aaaa
 <?php 
 $images = GDO_GalleryImage::table();
-$query = $images->select('*')->where("image_gallery={$gallery->getID()}");
+$query = $images->select('*')->where("files_object={$gallery->getID()}")->joinObject('files_file');
 $list = GDT_List::make();
 $list->paginate();
 $list->query($query);

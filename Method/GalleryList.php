@@ -18,6 +18,9 @@ final class GalleryList extends MethodQueryList
 		));
 	}
 	
+	/**
+	 * @return GDO_Gallery
+	 */
 	public function gdoTable()
 	{
 		return GDO_Gallery::table();
@@ -25,10 +28,17 @@ final class GalleryList extends MethodQueryList
 
 	public function gdoQuery()
 	{
-		$query = $this->gdoTable()->select();
+		$galleries = $this->gdoTable();
+		$query = $galleries->select();
 		if ($userId = Common::getGetInt('user'))
 		{
 			$query->where('gallery_creator='.$userId);
+		}
+		else
+		{
+			# Prepare query for acl condition
+			$galleries->aclColumn()->aclQuery(
+				$query, GDO_User::current(), 'gallery_creator');
 		}
 		return $query;
 	}
@@ -38,7 +48,7 @@ final class GalleryList extends MethodQueryList
 		$response = GDT_Response::make();
 		
 		# Own gallery allows you to add an image.
-		if (Common::getGetInt('user') == GDO_User::current()->getID())
+		if (Common::getGetString('user') === GDO_User::current()->getID())
 		{
 			$link = GDT_Link::make('link_gallery_add')->icon('create')->href(href('Gallery', 'Crud'));
 			$response->addField($link);

@@ -8,13 +8,15 @@ $user = GDO_User::current();
   <md-card-title>
 	<md-card-title-text>
 	  <span class="md-headline">
-		<div>“<?= html($image->getDescription()); ?>”</div>
+<?php if ($image->hasDescription()) : ?>
+		<div>“<?= $image->displayDescription(); ?>”</div>
+<?php endif; ?>
 		<div class="gdo-card-date"><?= $image->displayDate(); ?></div>
 	  </span>
 	</md-card-title-text>
   </md-card-title>
   <gdo-div></gdo-div>
   <md-card-content flex>
-	<img src="<?= $image->href_show(); ?>" />
+	<img src="<?= $image->href_show(); ?>" title="Gallery Image" alt="IMG" />
   </md-card-content>
 </md-card>

@@ -38,8 +38,15 @@ final class GDO_Gallery extends GDO
 		);
 	}
 	
-	public function canEdit(GDO_User $user) { return $this->getCreatorID() === $user->getID(); }
-	public function canView(GDO_User $user) { return Module_Gallery::instance()->canSeeGallery($user, $this->getCreator()); }
+	/**
+	 * @return GDT_ACL
+	 */
+	public function aclColumn() { return $this->gdoColumn('gallery_acl'); }
+
+	public function canEdit(GDO_User $user) { return ($this->getCreatorID() === $user->getID()) || ($user->isStaff()); }
+	public function canView(GDO_User $user) { return Module_Gallery::instance()->canSeeGallery($user, $this); }
+	
+	
 
 	/**
 	 * @return GDO_User

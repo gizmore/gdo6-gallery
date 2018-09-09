@@ -7,12 +7,18 @@ use GDO\Util\Common;
 use GDO\File\Method\GetFile;
 use GDO\User\GDO_User;
 
+/**
+ * Download a gallery image.
+ * @author gizmore@wechall.net
+ * @version 6.08
+ * @since 6.04
+ */
 final class Image extends Method
 {
 	public function execute()
 	{
 		$fileId = Common::getGetString('id');
-		$image = GDO_GalleryImage::getBy('files_file', $fileId);
+		$image = GDO_GalleryImage::findBy('files_file', $fileId);
 		$gallery = $image->getGallery();
 		if (!$gallery->canView(GDO_User::current()))
 		{

@@ -28,7 +28,6 @@ final class GDO_GalleryImage extends GDO_FileTable
 	###########
 	### GDO ###
 	###########
-	public function gdoCached() { return false; }
 	public function gdoColumns()
 	{
 		return array_merge(parent::gdoColumns(), array(
@@ -43,7 +42,8 @@ final class GDO_GalleryImage extends GDO_FileTable
 	 * @return GDO_File
 	 */
 	public function getFile() { return $this->getValue('files_file'); }
-
+	public function getFileID() { return $this->getVar('files_file'); }
+	
 	/**
 	 * @return GDO_Gallery
 	 */
@@ -56,14 +56,15 @@ final class GDO_GalleryImage extends GDO_FileTable
 	public function getCreator() { return $this->getValue('files_creator'); }
 	public function getCreated() { return $this->getVar('files_created'); }
 	public function getDescription() { return $this->getVar('files_description'); }
-
+	public function hasDescription() { return !!$this->getVar('files_description'); }
+	
 	public function displayDate() { return tt($this->getCreated()); }
 	public function displayDescription() { return $this->gdoColumn('files_description')->renderCell(); }
 	
 	##############
 	### Render ###
 	##############
-	public function href_show() { return href('Gallery', 'Image', "&id={$this->getID()}"); }
+	public function href_show() { return href('Gallery', 'Image', "&id={$this->getFileID()}"); }
 	
 	public function renderCard()
 	{

@@ -7,6 +7,7 @@ use GDO\User\GDO_User;
 use GDO\DB\GDT_Checkbox;
 use GDO\Friends\GDT_ACL;
 use GDO\User\GDO_UserSetting;
+use GDO\Core\GDO;
 
 final class Module_Gallery extends GDO_Module
 {
@@ -46,9 +47,18 @@ final class Module_Gallery extends GDO_Module
 		return GDO_UserSetting::userGet($user, 'gallery_acl');
 	}
 	
-	public function canSeeGallery(GDO_User $user, GDO_User $target)
+	public function canSeeGallery(GDO_User $user, GDO_Gallery $gallery)
 	{
-		return $this->cfgUserACL($target)->hasAccess($user, $target);
+		return $gallery->aclColumn()->hasAccess($user, $gallery->getCreator());
+	}
+	
+	public function canAddGallery(GDO_User $user)
+	{
+		if ($user->isMember())
+		{
+			return true;
+		}
+		return $this->cfgGuestGalleries();
 	}
 	
 	#############
@@ -66,5 +76,27 @@ final class Module_Gallery extends GDO_Module
 			$this->templatePHP('rightbar.php', ['navbar'=>$navbar]);
 		}
 	}
+	
+	public function hookUserSettingChange(GDO_User $user, $key, $value)
+	{
+		if ($key === 'gallery_acl')
+		{
+			$this->changeAllGalleryACL($user, $value);
+		}
+	}
+	
+	/**
+	 * Update all user galleries when main acl is changed.
+	 * @param GDO_User $user
+	 * @param string $value
+	 */
+	private function changeAllGalleryACL(GDO_User $user, $value)
+	{
+		GDO_Gallery::table()->update()->
+			set('gallery_acl='.GDO::quoteS($value))->
+			where('gallery_creator='.$user->getID())->
+			exec();
+	}
+	
 
 }
