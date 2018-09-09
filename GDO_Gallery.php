@@ -22,6 +22,7 @@ use GDO\Friends\GDT_ACL;
  */
 final class GDO_Gallery extends GDO
 {
+	public function gdoCached() { return false; }
 	public function gdoColumns()
 	{
 		return array(
