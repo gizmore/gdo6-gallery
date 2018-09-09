@@ -10,6 +10,7 @@ use GDO\UI\GDT_Message;
 use GDO\DB\GDT_String;
 use GDO\User\GDO_User;
 use GDO\File\GDT_ImageFiles;
+use GDO\Friends\GDT_ACL;
 
 /**
  * A gallery is a collection of images.
@@ -29,6 +30,7 @@ final class GDO_Gallery extends GDO
 			GDT_Message::make('gallery_description'),
 			GDT_CreatedBy::make('gallery_creator'),
 			GDT_CreatedAt::make('gallery_created'),
+			GDT_ACL::make('gallery_acl')->initial(Module_Gallery::instance()->cfgUserACL(GDO_User::current())->initial),
 			GDT_ImageFiles::make('gallery_files')->maxfiles(100)->
 				scaledVersion('thumb', 320, 240)->
 				fileTable(GDO_GalleryImage::table())->
@@ -37,7 +39,7 @@ final class GDO_Gallery extends GDO
 	}
 	
 	public function canEdit(GDO_User $user) { return $this->getCreatorID() === $user->getID(); }
-	
+	public function canView(GDO_User $user) { return Module_Gallery::instance()->canSeeGallery($user, $this->getCreator()); }
 
 	/**
 	 * @return GDO_User
