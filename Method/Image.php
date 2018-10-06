@@ -24,6 +24,6 @@ final class Image extends Method
 		{
 			return $this->error('err_permission');
 		}
-		return GetFile::make()->executeWithId($fileId);
+		return GetFile::make()->executeWithId($fileId, Common::getGetString('variant'));
 	}
 }
