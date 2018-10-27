@@ -17,6 +17,11 @@ $user = GDO_User::current();
   </md-card-title>
   <gdo-div></gdo-div>
   <md-card-content flex>
-	<img src="<?= $image->href_show(); ?>" title="Gallery Image" alt="IMG" />
+    <a href="<?=$image->href_full()?>" target="_blank">
+      <img
+	   src="<?= $image->href_show(); ?>"
+	   title="Gallery Image"
+	   alt="Image" />
+    </a>
   </md-card-content>
 </md-card>

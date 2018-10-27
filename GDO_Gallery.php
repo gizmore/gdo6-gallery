@@ -27,15 +27,15 @@ final class GDO_Gallery extends GDO
 	{
 		return array(
 			GDT_AutoInc::make('gallery_id'),
-			GDT_String::make('gallery_title')->notNull()->initial(t('gallery_title_suggestion')),
-			GDT_Message::make('gallery_description'),
+			GDT_String::make('gallery_title')->label('title')->notNull()->initial(t('gallery_title_suggestion')),
+			GDT_Message::make('gallery_description')->label('description'),
 			GDT_CreatedBy::make('gallery_creator'),
 			GDT_CreatedAt::make('gallery_created'),
 			GDT_ACL::make('gallery_acl')->initial(Module_Gallery::instance()->cfgUserACL(GDO_User::current())->initial),
 			GDT_ImageFiles::make('gallery_files')->maxfiles(100)->
 				scaledVersion('thumb', 320, 240)->
 				fileTable(GDO_GalleryImage::table())->
-				previewHREF(href('Gallery', 'Image', '&id=')),
+				previewHREF(href('Gallery', 'Image', '&variant=thumb&id=')),
 		);
 	}
 	

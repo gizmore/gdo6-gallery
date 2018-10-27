@@ -1,5 +1,4 @@
 <?php
-use GDO\Gallery\GDO_Gallery;
 use GDO\Gallery\GDO_GalleryImage;
 use GDO\Table\GDT_List;
 use GDO\UI\GDT_Bar;
