@@ -20,9 +20,10 @@ final class Image extends Method
 		$fileId = Common::getGetString('id');
 		$image = GDO_GalleryImage::findBy('files_file', $fileId);
 		$gallery = $image->getGallery();
-		if (!$gallery->canView(GDO_User::current()))
+		$reason = '';
+		if (!$gallery->canView(GDO_User::current(), $reason))
 		{
-			return $this->error('err_permission');
+			return $this->error('err_not_allowed', [$reason]);
 		}
 		return GetFile::make()->executeWithId($fileId, Common::getGetString('variant'));
 	}

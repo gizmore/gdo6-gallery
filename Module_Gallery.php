@@ -47,9 +47,9 @@ final class Module_Gallery extends GDO_Module
 		return GDO_UserSetting::userGet($user, 'gallery_acl');
 	}
 	
-	public function canSeeGallery(GDO_User $user, GDO_Gallery $gallery)
+	public function canSeeGallery(GDO_User $user, GDO_Gallery $gallery, &$reason)
 	{
-		return $gallery->aclColumn()->hasAccess($user, $gallery->getCreator());
+		return $gallery->aclColumn()->hasAccess($user, $gallery->getCreator(), $reason);
 	}
 	
 	public function canAddGallery(GDO_User $user)
