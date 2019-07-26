@@ -14,6 +14,7 @@ final class Module_Gallery extends GDO_Module
 	##############
 	### Module ###
 	##############
+	public function getDependencies() { return ['File']; }
 	public function getClasses() { return ['GDO\Gallery\GDO_Gallery', 'GDO\Gallery\GDO_GalleryImage']; }
 	public function onLoadLanguage() { $this->loadLanguage('lang/gallery'); }
 	
