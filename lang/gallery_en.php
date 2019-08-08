@@ -12,4 +12,6 @@ return array(
 'err_gallery_view_permission' => 'You are not allowed to view this gallery: %s',
 
 'cfg_gallery_acl' => 'Gallery visibility',
+	
+'gallery_title_suggestion' => '%s\'s gallery',
 );

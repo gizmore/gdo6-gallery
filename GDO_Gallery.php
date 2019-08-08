@@ -27,7 +27,7 @@ final class GDO_Gallery extends GDO
 	{
 		return array(
 			GDT_AutoInc::make('gallery_id'),
-			GDT_String::make('gallery_title')->label('title')->notNull()->initial(t('gallery_title_suggestion')),
+			GDT_String::make('gallery_title')->label('title')->notNull()->initial(t('gallery_title_suggestion', [GDO_User::current()->displayName()])),
 			GDT_Message::make('gallery_description')->label('description'),
 			GDT_CreatedBy::make('gallery_creator'),
 			GDT_CreatedAt::make('gallery_created'),

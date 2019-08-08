@@ -14,7 +14,7 @@ final class GalleryList extends MethodQueryList
 	public function gdoParameters()
 	{
 		return array_merge(parent::gdoParameters(), array(
-			GDT_User::make('user'),
+			GDT_User::make('user')->noFilter(),
 		));
 	}
 	
@@ -30,9 +30,10 @@ final class GalleryList extends MethodQueryList
 	{
 		$galleries = $this->gdoTable();
 		$query = $galleries->select();
-		if ($userId = Common::getGetInt('user'))
+		$query->joinObject('gallery_creator');
+		if ($userId = (int) $this->gdoParameterVar('user'))
 		{
-			$query->where('gallery_creator='.$userId);
+			$query->where("gallery_creator=$userId");
 		}
 		else
 		{
