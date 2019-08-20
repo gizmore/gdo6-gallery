@@ -5,10 +5,9 @@ use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Button;
 use GDO\User\GDO_User;
 
-/** @var $gallery GDO_Gallery **/
+/** @var $gallery \GDO\Gallery\GDO_Gallery **/
 $user = GDO_User::current();
-?>
-<?php
+
 $bar = GDT_Bar::make();
 if ($gallery->canEdit($user))
 {
@@ -16,8 +15,7 @@ if ($gallery->canEdit($user))
 	$bar->addField($button);
 }
 echo $bar->renderCell();
-?>
-<?php 
+
 $images = GDO_GalleryImage::table();
 $query = $images->select('*')->where("files_object={$gallery->getID()}")->joinObject('files_file');
 $list = GDT_List::make();

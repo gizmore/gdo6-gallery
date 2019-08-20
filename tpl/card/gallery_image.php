@@ -1,27 +1,23 @@
 <?php
-use GDO\Gallery\GDO_GalleryImage;
-use GDO\User\GDO_User;
-$image instanceof GDO_GalleryImage;
-$user = GDO_User::current();
-?>
-<md-card class="gdo-gallery-image">
-  <md-card-title>
-	<md-card-title-text>
-	  <span class="md-headline">
-<?php if ($image->hasDescription()) : ?>
-		<div>“<?= $image->displayDescription(); ?>”</div>
-<?php endif; ?>
-		<div class="gdo-card-date"><?= $image->displayDate(); ?></div>
-	  </span>
-	</md-card-title-text>
-  </md-card-title>
-  <gdo-div></gdo-div>
-  <md-card-content flex>
-    <a href="<?=$image->href_full()?>" target="_blank">
-      <img
-	   src="<?= $image->href_show(); ?>"
-	   title="Gallery Image"
-	   alt="Image" />
-    </a>
-  </md-card-content>
-</md-card>
+use GDO\UI\GDT_Card;
+use GDO\UI\GDT_Title;
+use GDO\UI\GDT_HTML;
+
+/** @var $image \GDO\Gallery\GDO_GalleryImage **/
+
+$card = GDT_Card::make()->withCreated()->addClass('gdo-gallery-image')->gdo($image);
+
+if ($image->hasDescription())
+{
+	$card->title(GDT_Title::make()->initial($image->displayDescription()));
+}
+
+$html = <<<EOF
+<a href="{$image->href_full()}" target="_blank">
+  <img src="{$image->href_show()}" alt="Image" />
+</a>
+EOF;
+
+$card->addField(GDT_HTML::make()->html($html));
+
+echo $card->render();
