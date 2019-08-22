@@ -5,9 +5,9 @@ use GDO\Gallery\GDO_Gallery;
 use GDO\Table\MethodQueryList;
 use GDO\Util\Common;
 use GDO\Core\GDT_Response;
-use GDO\UI\GDT_Link;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
+use GDO\UI\GDT_Button;
 
 final class GalleryList extends MethodQueryList
 {
@@ -51,7 +51,7 @@ final class GalleryList extends MethodQueryList
 		# Own gallery allows you to add an image.
 		if (Common::getGetString('user') === GDO_User::current()->getID())
 		{
-			$link = GDT_Link::make('link_gallery_add')->icon('create')->href(href('Gallery', 'Crud'));
+			$link = GDT_Button::make('link_gallery_add')->icon('create')->href(href('Gallery', 'Crud'));
 			$response->addField($link);
 		}
 		
