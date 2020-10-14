@@ -15,7 +15,9 @@ use GDO\User\GDO_User;
  */
 final class Image extends Method
 {
-	public function execute()
+    public function saveLastUrl() { return false; }
+    
+    public function execute()
 	{
 		$fileId = Common::getGetString('id');
 		$image = GDO_GalleryImage::findBy('files_file', $fileId);
