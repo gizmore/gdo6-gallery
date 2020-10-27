@@ -1,23 +1,29 @@
 <?php
+# Imports
 use GDO\UI\GDT_Card;
-use GDO\UI\GDT_Title;
 use GDO\UI\GDT_HTML;
 
+# Variables
 /** @var $image \GDO\Gallery\GDO_GalleryImage **/
+$gallery = $image->getGallery();
 
-$card = GDT_Card::make()->withCreated()->addClass('gdo-gallery-image')->gdo($image);
+# Title and creator
+$card = GDT_Card::make()->addClass('gdo-gallery-image')->gdo($image);
+$card->titleCreation($gallery->gdoColumn('gallery_title'));
 
-if ($image->hasDescription())
-{
-	$card->title(GDT_Title::make()->initial($image->displayDescription()));
-}
-
+# Image content
 $html = <<<EOF
 <a href="{$image->href_full()}" target="_blank">
-  <img src="{$image->href_show()}" alt="Image" />
+  <img src="{$image->href_show()}" alt="Gallery Image" />
 </a>
 EOF;
-
 $card->addField(GDT_HTML::make()->html($html));
 
+# Description footer
+if ($image->hasDescription())
+{
+    $card->subtext($image->gdoColumn('gallery_description'));
+}
+
+# Render
 echo $card->render();

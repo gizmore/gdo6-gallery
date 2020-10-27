@@ -19,6 +19,10 @@ echo $bar->renderCell();
 $images = GDO_GalleryImage::table();
 $query = $images->select('*')->where("files_object={$gallery->getID()}")->joinObject('files_file');
 $list = GDT_List::make();
-$list->paginate();
 $list->query($query);
-echo $list->renderCell();
+$list->countQuery($query->copy()->selectOnly('COUNT(*)'));
+$list->paginateDefault();
+$pagemenu = $list->getPageMenu();
+$pagemenu->filterQuery($query);
+
+echo $list->render();
