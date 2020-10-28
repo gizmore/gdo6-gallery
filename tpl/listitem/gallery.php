@@ -12,7 +12,7 @@ $gallery instanceof GDO_Gallery;
 
 $li = GDT_ListItem::make()->gdo($gallery);
 
-$li->titleCreation($gallery->gdoColumn('gallery_title'));
+$li->creatorHeader($gallery->gdoColumn('gallery_title'));
 
 $subtext = t('gallery_li2', [$gallery->getImageCount(), $gallery->getCreator()->displayNameLabel(), $gallery->displayDate()]);
 $li->subtext(GDT_Label::make()->rawLabel($subtext));

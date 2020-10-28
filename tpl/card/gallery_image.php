@@ -9,7 +9,7 @@ $gallery = $image->getGallery();
 
 # Title and creator
 $card = GDT_Card::make()->addClass('gdo-gallery-image')->gdo($image);
-$card->titleCreation($gallery->gdoColumn('gallery_title'));
+$card->creatorHeader($gallery->gdoColumn('gallery_title'));
 
 # Image content
 $html = <<<EOF
