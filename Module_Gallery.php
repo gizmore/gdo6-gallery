@@ -3,6 +3,7 @@ namespace GDO\Gallery;
 
 use GDO\Core\GDO_Module;
 use GDO\UI\GDT_Bar;
+use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 use GDO\DB\GDT_Checkbox;
 use GDO\Friends\GDT_ACL;
@@ -67,14 +68,15 @@ final class Module_Gallery extends GDO_Module
 	#############
 	public function hookLeftBar(GDT_Bar $navbar)
 	{
-		$this->templatePHP('leftbar.php', ['navbar'=>$navbar]);
+	    $navbar->addField(GDT_Link::make('link_gallery')->href(href('Gallery', 'GalleryList')));
 	}
 
 	public function hookRightBar(GDT_Bar $navbar)
 	{
-		if (GDO_User::current()->isAuthenticated())
+	    $user = GDO_User::current();
+		if ($user->isAuthenticated())
 		{
-			$this->templatePHP('rightbar.php', ['navbar'=>$navbar]);
+		    $navbar->addField(GDT_Link::make('link_your_gallery')->href(href('Gallery', 'GalleryList', '&user='.$user->getID())));
 		}
 	}
 	
