@@ -8,7 +8,7 @@ return array(
 'link_gallery' => 'Gallerien',
 'link_your_gallery' => 'Deine Gallerie',
 'link_gallery_add' => 'Neue Gallerie erstellen',
-'list_gallerylist' => 'Gallerien',
+'list_gallery_gallerylist' => '%s Gallerien',
 ##################################################
 'gallery_li2' => '%s Bild(er) von %s am %s',
 ##################################################
