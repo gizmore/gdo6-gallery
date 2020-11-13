@@ -2,20 +2,27 @@
 namespace GDO\Gallery;
 
 use GDO\Core\GDO_Module;
-use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 use GDO\DB\GDT_Checkbox;
 use GDO\Friends\GDT_ACL;
 use GDO\Core\GDO;
+use GDO\UI\GDT_Page;
 
+/**
+ * Image galleries.
+ * 
+ * @author gizmore
+ * @version 6.10
+ * @since 6.07
+ */
 final class Module_Gallery extends GDO_Module
 {
 	##############
 	### Module ###
 	##############
 	public function getDependencies() { return ['File']; }
-	public function getClasses() { return ['GDO\Gallery\GDO_Gallery', 'GDO\Gallery\GDO_GalleryImage']; }
+	public function getClasses() { return [GDO_Gallery::class, GDO_GalleryImage::class]; }
 	public function onLoadLanguage() { $this->loadLanguage('lang/gallery'); }
 	
 	##############
@@ -24,11 +31,15 @@ final class Module_Gallery extends GDO_Module
 	public function getConfig()
 	{
 		return array(
-			GDT_Checkbox::make('guest_galleries')->initial('1')->notNull(),
+		    GDT_Checkbox::make('guest_galleries')->initial('1')->notNull(),
+		    GDT_Checkbox::make('hook_left_bar')->initial('1')->notNull(),
+		    GDT_Checkbox::make('hook_right_bar')->initial('1')->notNull(),
 		);
 	}
 	public function cfgGuestGalleries() { return $this->getConfigValue('guest_galleries'); }
-
+	public function cfgHookLeftBar() { return $this->getConfigValue('hook_left_bar'); }
+	public function cfgHookRightBar() { return $this->getConfigValue('hook_right_bar'); }
+	
 	public function getUserSettings()
 	{
 		return array(
@@ -65,20 +76,24 @@ final class Module_Gallery extends GDO_Module
 	#############
 	### Hooks ###
 	#############
-	public function hookLeftBar(GDT_Bar $navbar)
+	public function onInitSidebar()
 	{
-	    $navbar->addField(GDT_Link::make('link_gallery')->href(href('Gallery', 'GalleryList')));
+// 	    if ($this->cfgHookLeftBar())
+	    {
+	        GDT_Page::$INSTANCE->leftNav->addField(
+	            GDT_Link::make('link_gallery')->href(href('Gallery', 'GalleryList')));
+	    }
+	    if ($this->cfgHookRightBar())
+	    {
+	        $user = GDO_User::current();
+	        if ($user->isAuthenticated())
+	        {
+	            GDT_Page::$INSTANCE->rightNav->addField(
+	                GDT_Link::make('link_your_gallery')->href(href('Gallery', 'GalleryList', '&user='.$user->getID())));
+	        }
+	    }
 	}
 
-	public function hookRightBar(GDT_Bar $navbar)
-	{
-	    $user = GDO_User::current();
-		if ($user->isAuthenticated())
-		{
-		    $navbar->addField(GDT_Link::make('link_your_gallery')->href(href('Gallery', 'GalleryList', '&user='.$user->getID())));
-		}
-	}
-	
 	public function hookUserSettingChange(GDO_User $user, $key, $value)
 	{
 		if ($key === 'gallery_acl')
@@ -99,6 +114,5 @@ final class Module_Gallery extends GDO_Module
 			where('gallery_creator='.$user->getID())->
 			exec();
 	}
-	
 
 }
