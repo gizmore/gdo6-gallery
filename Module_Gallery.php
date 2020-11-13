@@ -7,7 +7,6 @@ use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 use GDO\DB\GDT_Checkbox;
 use GDO\Friends\GDT_ACL;
-use GDO\User\GDO_UserSetting;
 use GDO\Core\GDO;
 
 final class Module_Gallery extends GDO_Module
@@ -46,7 +45,7 @@ final class Module_Gallery extends GDO_Module
 	 */
 	public function cfgUserACL(GDO_User $user)
 	{
-		return GDO_UserSetting::userGet($user, 'gallery_acl');
+		return Module_Gallery::instance()->userSetting($user, 'gallery_acl');
 	}
 	
 	public function canSeeGallery(GDO_User $user, GDO_Gallery $gallery, &$reason)
