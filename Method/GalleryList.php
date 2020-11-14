@@ -26,7 +26,7 @@ final class GalleryList extends MethodQueryList
 		return GDO_Gallery::table();
 	}
 
-	public function gdoQuery()
+	public function getQuery()
 	{
 		$galleries = $this->gdoTable();
 		$query = $galleries->select();

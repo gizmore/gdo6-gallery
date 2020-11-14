@@ -15,7 +15,7 @@ $li = GDT_ListItem::make()->gdo($gallery);
 $li->creatorHeader($gallery->gdoColumn('gallery_title'));
 
 $subtext = t('gallery_li2', [$gallery->getImageCount(), $gallery->getCreator()->displayNameLabel(), $gallery->displayDate()]);
-$li->subtext(GDT_Label::make()->rawLabel($subtext));
+$li->subtext(GDT_Label::make()->labelRaw($subtext));
 
 $actions = $li->actions();
 if ($gallery->canEdit(GDO_User::current()))
