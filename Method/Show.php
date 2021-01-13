@@ -10,9 +10,9 @@ final class Show extends Method
 {
 	public function gdoParameters()
 	{
-	    return [
+	    return array_merge(parent::gdoParameters(), [
 	        GDT_Object::make('id')->table(GDO_Gallery::table())->notNull(),
-	    ];
+	    ]);
 	}
 	
 	public function execute()
