@@ -18,7 +18,8 @@ echo $bar->renderCell();
 
 $images = GDO_GalleryImage::table();
 $query = $images->select('*')->where("files_object={$gallery->getID()}")->joinObject('files_file');
-$list = GDT_List::make();
+$list = GDT_List::make()->listMode(GDT_List::MODE_CARD);
+$list->setupHeaders(false, true);
 $list->query($query);
 $list->countQuery($query->copy()->selectOnly('COUNT(*)'));
 $list->paginateDefault();
