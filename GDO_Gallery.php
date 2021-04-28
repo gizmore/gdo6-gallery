@@ -65,6 +65,9 @@ final class GDO_Gallery extends GDO
 	
 	public function renderList() { return GDT_Template::php('Gallery', 'listitem/gallery.php', ['gallery'=>$this]); }
 	
+	/**
+	 * @return \GDO\Gallery\GDO_GalleryImage[]
+	 */
 	public function getImages()
 	{
 		return GDO_GalleryImage::table()->select('*')->
