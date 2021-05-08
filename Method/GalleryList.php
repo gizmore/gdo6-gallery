@@ -56,7 +56,7 @@ final class GalleryList extends MethodQueryList
 		}
 		
 		# Append the list
-		return $response->add(parent::execute());
+		return $response->addField(parent::execute());
 	}
 	
 }
