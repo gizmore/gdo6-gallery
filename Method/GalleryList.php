@@ -49,7 +49,7 @@ final class GalleryList extends MethodQueryList
 		$response = GDT_Response::make();
 		
 		# Own gallery allows you to add an image.
-		if (Common::getGetString('user') === GDO_User::current()->getID())
+		if (Common::getRequestString('user') === GDO_User::current()->getID())
 		{
 			$link = GDT_Button::make('link_gallery_add')->icon('create')->href(href('Gallery', 'Crud'));
 			$response->addField($link);
