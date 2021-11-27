@@ -19,7 +19,7 @@ final class Image extends Method
     
     public function execute()
 	{
-		$fileId = Common::getGetString('id');
+		$fileId = Common::getRequestString('id');
 		$image = GDO_GalleryImage::findBy('files_file', $fileId);
 		$gallery = $image->getGallery();
 		$reason = '';
@@ -27,6 +27,6 @@ final class Image extends Method
 		{
 			return $this->error('err_not_allowed', [$reason]);
 		}
-		return GetFile::make()->executeWithId($fileId, Common::getGetString('variant'));
+		return GetFile::make()->executeWithId($fileId, Common::getRequestString('variant'));
 	}
 }

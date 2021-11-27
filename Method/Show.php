@@ -17,7 +17,7 @@ final class Show extends Method
 	
 	public function execute()
 	{
-		$gallery = GDO_Gallery::findById(Common::getGetString('id'));
+		$gallery = GDO_Gallery::findById(Common::getRequestString('id'));
 		return $this->templatePHP('gallery.php', ['gallery' => $gallery]);
 	}
 	

@@ -17,15 +17,15 @@ use GDO\Friends\GDT_ACL;
  * 
  * @see GDT_ImageFiles
  * @author gizmore@wechall.net
- * @version 6.08
- * @since 6.02
+ * @version 6.11.0
+ * @since 6.2.0
  */
 final class GDO_Gallery extends GDO
 {
 	public function gdoCached() { return false; }
 	public function gdoColumns()
 	{
-		return array(
+		return [
 			GDT_AutoInc::make('gallery_id'),
 			GDT_String::make('gallery_title')->label('title')->notNull()->initial(t('gallery_title_suggestion', [GDO_User::current()->displayNameLabel()])),
 			GDT_Message::make('gallery_description')->label('description'),
@@ -35,8 +35,8 @@ final class GDO_Gallery extends GDO
 			GDT_ImageFiles::make('gallery_files')->maxfiles(100)->
 				scaledVersion('thumb', 320, 240)->
 				fileTable(GDO_GalleryImage::table())->
-				previewHREF(href('Gallery', 'Image', '&variant=thumb&id=')),
-		);
+				previewHREF(href('Gallery', 'Image', '&variant=thumb&id={id}')),
+		];
 	}
 	
 	/**

@@ -13,8 +13,8 @@ use GDO\UI\GDT_Page;
  * Image galleries.
  * 
  * @author gizmore
- * @version 6.10
- * @since 6.07
+ * @version 6.11.0
+ * @since 6.7.0
  */
 final class Module_Gallery extends GDO_Module
 {
@@ -30,11 +30,11 @@ final class Module_Gallery extends GDO_Module
 	##############
 	public function getConfig()
 	{
-		return array(
+		return [
 		    GDT_Checkbox::make('guest_galleries')->initial('1')->notNull(),
 		    GDT_Checkbox::make('hook_left_bar')->initial('1')->notNull(),
 		    GDT_Checkbox::make('hook_right_bar')->initial('1')->notNull(),
-		);
+		];
 	}
 	public function cfgGuestGalleries() { return $this->getConfigValue('guest_galleries'); }
 	public function cfgHookLeftBar() { return $this->getConfigValue('hook_left_bar'); }
@@ -42,9 +42,9 @@ final class Module_Gallery extends GDO_Module
 	
 	public function getUserSettings()
 	{
-		return array(
+		return [
 			GDT_ACL::make('gallery_acl')->initial('acl_all'),
-		);
+		];
 	}
 	
 	###########
@@ -78,7 +78,7 @@ final class Module_Gallery extends GDO_Module
 	#############
 	public function onInitSidebar()
 	{
-// 	    if ($this->cfgHookLeftBar())
+	    if ($this->cfgHookLeftBar())
 	    {
 	        GDT_Page::$INSTANCE->leftNav->addField(
 	            GDT_Link::make('link_gallery')->href(href('Gallery', 'GalleryList')));
