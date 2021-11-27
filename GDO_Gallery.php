@@ -11,6 +11,7 @@ use GDO\DB\GDT_String;
 use GDO\User\GDO_User;
 use GDO\File\GDT_ImageFiles;
 use GDO\Friends\GDT_ACL;
+use GDO\UI\GDT_Title;
 
 /**
  * A gallery is a collection of images.
@@ -27,7 +28,7 @@ final class GDO_Gallery extends GDO
 	{
 		return [
 			GDT_AutoInc::make('gallery_id'),
-			GDT_String::make('gallery_title')->label('title')->notNull()->initial(t('gallery_title_suggestion', [GDO_User::current()->displayNameLabel()])),
+			GDT_Title::make('gallery_title')->label('title')->notNull()->initial(t('gallery_title_suggestion', [GDO_User::current()->displayNameLabel()])),
 			GDT_Message::make('gallery_description')->label('description'),
 			GDT_CreatedBy::make('gallery_creator'),
 			GDT_CreatedAt::make('gallery_created'),
