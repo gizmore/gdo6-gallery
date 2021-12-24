@@ -30,7 +30,6 @@ final class GalleryList extends MethodQueryList
 	{
 		$galleries = $this->gdoTable();
 		$query = $galleries->select();
-		$query->joinObject('gallery_creator');
 		if ($userId = (int) $this->gdoParameterVar('user'))
 		{
 			$query->where("gallery_creator=$userId");

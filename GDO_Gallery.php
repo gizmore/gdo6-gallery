@@ -7,7 +7,6 @@ use GDO\DB\GDT_CreatedAt;
 use GDO\DB\GDT_CreatedBy;
 use GDO\Core\GDT_Template;
 use GDO\UI\GDT_Message;
-use GDO\DB\GDT_String;
 use GDO\User\GDO_User;
 use GDO\File\GDT_ImageFiles;
 use GDO\Friends\GDT_ACL;
@@ -18,7 +17,7 @@ use GDO\UI\GDT_Title;
  * 
  * @see GDT_ImageFiles
  * @author gizmore@wechall.net
- * @version 6.11.0
+ * @version 6.11.2
  * @since 6.2.0
  */
 final class GDO_Gallery extends GDO
